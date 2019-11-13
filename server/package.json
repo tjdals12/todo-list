@@ -1,0 +1,47 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/cli": "^7.7.0",
+        "@babel/core": "^7.7.2",
+        "@babel/node": "^7.7.0",
+        "@babel/polyfill": "^7.7.0",
+        "@babel/preset-env": "^7.7.1",
+        "@babel/register": "^7.7.0",
+        "chai": "^4.2.0",
+        "cli-color": "^2.0.0",
+        "eslint": "^6.6.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-config-prettier": "^6.5.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-prettier": "^3.1.1",
+        "mocha": "^6.2.2",
+        "mockgoose": "^8.0.4",
+        "nodemon": "^1.19.4",
+        "prettier": "^1.19.1",
+        "supertest": "^4.0.2"
+    },
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "joi": "^14.3.1",
+        "koa": "^2.11.0",
+        "koa-bodyparser": "^4.2.1",
+        "koa-convert": "^1.2.0",
+        "koa-helmet": "^5.2.0",
+        "koa-morgan": "^1.0.1",
+        "koa-mount": "^4.0.0",
+        "koa-router": "^7.4.0",
+        "koa-static": "^5.0.0",
+        "koa2-cors": "^2.0.6",
+        "moment-timezone": "^0.5.27",
+        "mongoose": "^5.7.10",
+        "swagger-jsdoc": "^3.4.0",
+        "swagger-ui-koa": "^0.0.1"
+    },
+    "scripts": {
+        "dev": "NODE_ENV=development NODE_PATH=src nodemon --watch src/ src/server.js --exec babel-node",
+        "test": "env NODE_ENV=test NODE_PATH=$NODE_PATH:$PWD/src mocha --timeout 30000 --require @babel/register $(find src/apis/ -name *.spec.js) --exit"
+    }
+}
