@@ -12,7 +12,9 @@ module.exports = {
         'import/no-unresolved': 0,
         'import/no-extraneous-dependencies': [1, { devDependencies: true }],
         'import/prefer-default-export': 0,
-        'spaced-comment': 0
+        'spaced-comment': 0,
+        'no-shadow': 0,
+        'no-underscore-dangle': 0
     },
     env: {
         browser: true,

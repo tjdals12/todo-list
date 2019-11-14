@@ -5,6 +5,7 @@ import * as modules from './modules';
 import rootSaga from './sagas';
 
 const reducer = combineReducers(modules);
+export type RootState = ReturnType<typeof reducer>;
 
 const configureStore = (preloadState?: Record<string, object>): Store => {
     const sagaMiddleware = createSagaMiddleware();
