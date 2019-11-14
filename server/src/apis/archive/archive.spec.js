@@ -31,7 +31,7 @@ describe(clc.bgGreen(clc.black('[ Archive ]')), () => {
             .catch(err => done(err));
     });
 
-    it('addArchive', done => {
+    it('createArchive', done => {
         request(server)
             .post('/api/archives')
             .send({
@@ -41,9 +41,9 @@ describe(clc.bgGreen(clc.black('[ Archive ]')), () => {
             .end((err, ctx) => {
                 if (err) throw err;
 
-                id = ctx.body.data._id;
+                id = ctx.body._id;
 
-                expect(ctx.body.data.title).to.equals('Archive 추가');
+                expect(ctx.body.title).to.equals('Archive 추가');
                 done();
             });
     });
@@ -55,7 +55,7 @@ describe(clc.bgGreen(clc.black('[ Archive ]')), () => {
             .end((err, ctx) => {
                 if (err) throw err;
 
-                expect(ctx.body.data).have.length(1);
+                expect(ctx.body).have.length(1);
                 done();
             });
     });
@@ -67,7 +67,7 @@ describe(clc.bgGreen(clc.black('[ Archive ]')), () => {
             .end((err, ctx) => {
                 if (err) throw err;
 
-                expect(ctx.body.data._id).to.equals(id);
+                expect(ctx.body._id).to.equals(id);
                 done();
             });
     });
@@ -79,7 +79,7 @@ describe(clc.bgGreen(clc.black('[ Archive ]')), () => {
             .end((err, ctx) => {
                 if (err) throw err;
 
-                expect(ctx.body.data.deletedCount).to.equals(1);
+                expect(ctx.body.deletedCount).to.equals(1);
                 done();
             });
     });

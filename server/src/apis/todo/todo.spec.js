@@ -42,8 +42,8 @@ describe(clc.bgGreen(clc.black('[ Todo ]')), () => {
             .end((err, ctx) => {
                 if (err) throw err;
 
-                id = ctx.body.data._id;
-                const { todo, tags, isDone } = ctx.body.data;
+                id = ctx.body._id;
+                const { todo, tags, isDone } = ctx.body;
 
                 expect(todo).to.equals('Typescript로 사이드 프로젝트 해보기');
                 expect(tags).have.length(2);
@@ -59,7 +59,7 @@ describe(clc.bgGreen(clc.black('[ Todo ]')), () => {
             .end((err, ctx) => {
                 if (err) throw err;
 
-                expect(ctx.body.data).instanceOf(Object);
+                expect(ctx.body).instanceOf(Object);
                 done();
             });
     });
@@ -71,8 +71,8 @@ describe(clc.bgGreen(clc.black('[ Todo ]')), () => {
             .end((err, ctx) => {
                 if (err) throw err;
 
-                expect(ctx.body.data).instanceOf(Array);
-                expect(ctx.body.data).have.length(1);
+                expect(ctx.body).instanceOf(Array);
+                expect(ctx.body).have.length(1);
                 done();
             });
     });

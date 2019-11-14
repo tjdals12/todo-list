@@ -5,9 +5,7 @@ export const getTodos = async ctx => {
     try {
         const todos = await Todo.find();
 
-        ctx.body = {
-            data: todos,
-        };
+        ctx.body = todos;
     } catch (e) {
         ctx.status = 500;
     }
@@ -19,9 +17,7 @@ export const getTodo = async ctx => {
     try {
         const todo = await Todo.findById(id);
 
-        ctx.body = {
-            data: todo,
-        };
+        ctx.body = todo;
     } catch (e) {
         ctx.status = 500;
     }
@@ -46,9 +42,7 @@ export const addTodo = async ctx => {
     try {
         const todo = await Todo.addTodo(ctx.request.body);
 
-        ctx.body = {
-            data: todo,
-        };
+        ctx.body = todo;
     } catch (e) {
         ctx.status = 500;
     }

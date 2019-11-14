@@ -15,9 +15,7 @@ export const getArchives = async ctx => {
             .skip((page - 1) * 10)
             .limit(10);
 
-        ctx.body = {
-            data: archives,
-        };
+        ctx.body = archives;
     } catch (e) {
         ctx.status = 500;
     }
@@ -29,9 +27,7 @@ export const getArchive = async ctx => {
     try {
         const archive = await Archive.findById(id);
 
-        ctx.body = {
-            data: archive,
-        };
+        ctx.body = archive;
     } catch (e) {
         ctx.status = 500;
     }
@@ -53,9 +49,7 @@ export const createArchive = async ctx => {
     try {
         const archive = await Archive.createArchive(ctx.request.body);
 
-        ctx.body = {
-            data: archive,
-        };
+        ctx.body = archive;
     } catch (e) {
         ctx.status = 500;
     }
@@ -67,9 +61,7 @@ export const deleteArchive = async ctx => {
     try {
         const result = await Archive.deleteOne({ _id: id });
 
-        ctx.body = {
-            data: result,
-        };
+        ctx.body = result;
     } catch (e) {
         ctx.status = 500;
     }
