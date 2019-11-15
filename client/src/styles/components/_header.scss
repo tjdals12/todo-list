@@ -1,0 +1,12 @@
+.cr-header {
+    height: 5rem;
+    border-bottom: $border-width solid $border-color;
+
+    .navbar-brand {
+        font-family: 'Satisfy', cursive;
+    }
+
+    &__nav-right {
+        margin-left: auto;
+    }
+}

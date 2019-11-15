@@ -1,4 +1,5 @@
 import { createReducer } from 'typesafe-actions';
+import produce from 'immer';
 import { archivesActionTypes, archivesStateTypes } from './types';
 
 const initialState: archivesStateTypes = {
@@ -20,10 +21,11 @@ export default createReducer<archivesStateTypes, archivesActionTypes>(
     initialState,
     {
         /** GET LIST */
-        'archives/GET_ARCHIVES_SUCCESS': (state, action) => ({
-            ...state,
-            archives: action.payload,
-        }),
+        'archives/GET_ARCHIVES_SUCCESS': (state, action) =>
+            // ! immer는 깊은 값을 수정할 때 사용하는 것을 권장함.
+            produce(state, draft => {
+                draft.archives = action.payload;
+            }),
         'archives/GET_ARCHIVES_FAULURE': state => state,
 
         /** GET ONE */

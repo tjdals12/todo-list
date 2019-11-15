@@ -1,0 +1,23 @@
+.cr-sidebar {
+    width: 6rem;
+    border-right: $border-width solid $border-color;
+
+    .nav {
+        .nav-item {
+            &:hover {
+                background: rgba(theme-color(primary), 0.23);
+            }
+        }
+
+        .nav-link {
+            height: 5rem;
+            color: $oc-gray-3;
+
+            &.active {
+                background: theme-color(primary);
+
+                color: white;
+            }
+        }
+    }
+}

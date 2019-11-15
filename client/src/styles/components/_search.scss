@@ -1,0 +1,19 @@
+.cr-search {
+    position: relative;
+
+    &__icon {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    &__input {
+        padding-left: 35px;
+
+        &::placeholder {
+            font-style: italic;
+            font-weight: 200;
+            color: $oc-gray-5;
+        }
+    }
+}
