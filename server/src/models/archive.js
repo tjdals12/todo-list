@@ -7,7 +7,7 @@ const ArchiveSchema = new Schema({
         type: Array,
         default: [],
     },
-    Timestamp: {
+    timestamp: {
         type: Timestamp.schema,
         default: Timestamp,
     },
