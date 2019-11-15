@@ -1,0 +1,21 @@
+.archive {
+    min-width: 30rem !important;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 3px 6px rgba(0, 0, 0, 0.18);
+
+    .archive__header {
+        display: flex;
+
+        .title {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        .buttons {
+            margin-left: auto;
+        }
+    }
+
+    .archive__body {
+        height: 65vh;
+        overflow-y: scroll;
+    }
+}

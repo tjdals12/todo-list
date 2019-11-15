@@ -10,8 +10,8 @@ export default function Page({
     children,
 }: PageProps): React.ReactElement {
     return (
-        <div className="page px-3 py-4">
-            <h1 className="display-4 title">{title}</h1>
+        <div className="page px-3 py-2">
+            <h1 className="display-4 mb-4 title">{title}</h1>
             {children}
         </div>
     );

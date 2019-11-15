@@ -1,2 +1,2 @@
-export { default as modals } from './modal';
-export { default as archive } from './archive';
+export { default as modals } from './modals';
+export { default as archives } from './archives';

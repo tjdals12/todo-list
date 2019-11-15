@@ -18,7 +18,7 @@ const menus = [
 
 export default function Sidebar(): React.ReactElement {
     return (
-        <div className="cr-sidebar bg-white">
+        <div className="cr-sidebar bg-white hidden-xs">
             <Navbar className="d-flex align-items-center justify-content-center mt-3 mb-5">
                 <NavbarBrand className="m-0">
                     <FaDropbox size={35} className="text-primary" />

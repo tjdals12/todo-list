@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Content from './Content';
 import Header from './Header';
+import Footer from './Footer';
 
 export default function MainLayout({
     children,
@@ -14,7 +15,7 @@ export default function MainLayout({
             <Content fluid className="cr-content">
                 <Header />
                 {children}
-                <footer>Footer</footer>
+                <Footer />
             </Content>
         </div>
     );

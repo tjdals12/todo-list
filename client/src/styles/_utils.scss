@@ -1,3 +1,49 @@
 .can-click {
     cursor: pointer;
 }
+
+.text-overflow-hidden {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.hidden-xs {
+    @include media-breakpoint-only(xs) {
+        display: none;
+    }
+}
+
+.hidden-sm {
+    @include media-breakpoint-only(sm) {
+        display: none;
+    }
+}
+
+.hidden-md {
+    @include media-breakpoint-only(md) {
+        display: none;
+    }
+}
+
+.hidden-lg {
+    @include media-breakpoint-only(lg) {
+        display: none;
+    }
+}
+
+.hidden-xl {
+    @include media-breakpoint-only(xl) {
+        display: none;
+    }
+}
+
+.break-md {
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+
+        & > * {
+            margin: 0.5rem 0 !important;
+        }
+    }
+}

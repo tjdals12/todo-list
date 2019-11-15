@@ -1,5 +1,5 @@
 import axios, { AxiosPromise, AxiosResponse, AxiosInstance } from 'axios';
-import { Archive, deleteResult } from 'store/modules/archive';
+import { Archive, deleteResult } from 'store/modules/archives';
 
 const api: AxiosInstance = axios.create({
     baseURL: '/api',
