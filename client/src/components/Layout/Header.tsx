@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, NavbarBrand, Nav, NavItem, Badge } from 'reactstrap';
 import { FaArchive } from 'react-icons/fa';
-import { useModalOpen as onOpen } from 'hooks/modal';
+import { useModalOpen as onOpen } from 'hooks/modals';
 import SearchForm from './SearchForm';
 
 export default function Header(): React.ReactElement {

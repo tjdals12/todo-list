@@ -10,7 +10,7 @@ import {
     Label,
     Input,
 } from 'reactstrap';
-import { useModal, useModalClose } from 'hooks/modal';
+import { useModal, useModalClose } from 'hooks/modals';
 import { useCreateArchive } from 'hooks/archives';
 import styles from './ArchiveCreateModal.scss';
 
