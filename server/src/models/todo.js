@@ -26,6 +26,8 @@ const TodoSchema = new Schema({
     },
 });
 
+TodoSchema.set('toJSON', { getters: true });
+
 TodoSchema.statics.addTodo = async function(params) {
     const { todo, tags } = params;
     const newTodo = new this({ todo, tags });

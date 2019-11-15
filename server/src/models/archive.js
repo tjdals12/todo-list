@@ -13,6 +13,8 @@ const ArchiveSchema = new Schema({
     },
 });
 
+ArchiveSchema.set('toJSON', { getters: true });
+
 ArchiveSchema.statics.createArchive = function(params) {
     const { title } = params;
     const archive = new this({ title });
