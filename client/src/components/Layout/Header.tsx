@@ -1,10 +1,12 @@
 import React from 'react';
 import { Navbar, NavbarBrand, Nav, NavItem, Badge } from 'reactstrap';
 import { FaArchive } from 'react-icons/fa';
-import { useModalOpen as onOpen } from 'hooks/modals';
+import { useModalOpen } from 'hooks/modals';
 import SearchForm from './SearchForm';
 
 export default function Header(): React.ReactElement {
+    const onOpen = useModalOpen();
+
     return (
         <Navbar className="cr-header bg-white" expand>
             <NavbarBrand className="pl-4 hidden-sm hidden-xs">
@@ -13,7 +15,7 @@ export default function Header(): React.ReactElement {
             <Nav navbar className="cr-header__nav-right mr-5">
                 <NavItem
                     className="position-relative can-click"
-                    onClick={onOpen('archiveCreateModal')}
+                    onClick={() => onOpen('archiveCreateModal')}
                 >
                     <FaArchive size={30} className="can-click" />
                     <Badge

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Page } from 'components/Layout';
-import { ArchiveCreateModal } from 'components/Modal';
+import { ArchiveCreateModal, TodoAddModal } from 'components/Modal';
 import ArchiveList from 'components/ArchiveList';
 
 export default function MainPage(): React.ReactElement {
@@ -8,6 +8,7 @@ export default function MainPage(): React.ReactElement {
         <Page title="Main">
             <ArchiveList />
 
+            <TodoAddModal />
             <ArchiveCreateModal />
         </Page>
     );

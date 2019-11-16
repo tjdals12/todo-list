@@ -32,4 +32,5 @@ export const getTodo = (id: string): AxiosPromise<AxiosResponse<Todo>> =>
 
 export const addTodo = (
     param: TodoParameter,
-): AxiosPromise<AxiosResponse<Todo>> => axios.post('/todos', { ...param });
+): AxiosPromise<AxiosResponse<Todo>> =>
+    api.post('/todos', { ...param, tags: param.tags.split(',') });

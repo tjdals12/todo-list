@@ -1,4 +1,4 @@
-import { createAsyncAction } from 'typesafe-actions';
+import { createAction, createAsyncAction } from 'typesafe-actions';
 import { Todo, TodoParameter } from './types';
 
 export const getTodos = createAsyncAction(
@@ -18,3 +18,8 @@ export const addTodo = createAsyncAction(
     'todos/ADD_TODO_SUCCESS',
     'todos/ADD_TODO_FAILURE',
 )<TodoParameter, Todo, void>();
+
+export const onChange = createAction(
+    'todos/ON_CHANGE',
+    (name: string, target?: string) => ({ name, target }),
+)();

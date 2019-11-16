@@ -3,7 +3,7 @@ import { modalsStateType, modalsActionTypes } from './types';
 import { OPEN, CLOSE } from './action';
 
 const initialState: modalsStateType = {
-    addTodoModal: false,
+    todoAddModal: false,
     archiveCreateModal: false,
 };
 
