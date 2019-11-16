@@ -41,8 +41,12 @@ function* handleRequestTodo() {
     }
 }
 
-function* runAddTodo(param: TodoParameter) {
-    const { data }: AxiosResponse<Todo> = yield call(api.addTodo, param);
+function* runAddTodo(archive: string, param: TodoParameter) {
+    const { data }: AxiosResponse<Todo> = yield call(
+        api.addTodo,
+        archive,
+        param,
+    );
 
     if (data) {
         yield put(addTodo.success(data));
@@ -58,7 +62,7 @@ function* handleAddTodo() {
             addTodo.request,
         );
 
-        yield fork(runAddTodo, action.payload);
+        yield fork(runAddTodo, action.payload.archive, action.payload.param);
     }
 }
 

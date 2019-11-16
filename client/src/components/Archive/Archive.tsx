@@ -5,6 +5,7 @@ import { FaPlus, FaEllipsisH } from 'react-icons/fa';
 import TodoItem from 'components/TodoItem';
 import { Archive as ArchiveType } from 'store/modules/archives';
 import { useModalOpen } from 'hooks/modals';
+import { useTododActions } from 'hooks/todos';
 import styles from './Archive.scss';
 
 const cx = classNames.bind(styles);
@@ -46,6 +47,7 @@ export default function Archive({
     className,
 }: ArchiveProps): React.ReactElement {
     const onOpen = useModalOpen();
+    const { onTarget } = useTododActions();
 
     return (
         <Card className={cx(className, 'archive mr-4')}>
@@ -59,7 +61,10 @@ export default function Archive({
                     <Button
                         color="primary"
                         className="mr-2"
-                        onClick={() => onOpen('todoAddModal')}
+                        onClick={() => {
+                            onTarget(archive._id);
+                            onOpen('todoAddModal');
+                        }}
                     >
                         <FaPlus size={15} />
                     </Button>

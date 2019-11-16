@@ -10,6 +10,7 @@ const initialState: todosStateTypes = {
         effEndDt: '',
         effStaDt: '',
     },
+    target: '',
 };
 
 export default createReducer<todosStateTypes, todosActionTypes>(initialState, {
@@ -33,4 +34,8 @@ export default createReducer<todosStateTypes, todosActionTypes>(initialState, {
         todo: action.payload,
     }),
     'todos/ADD_TODO_FAILURE': state => state,
+    'todos/SET_TARGET': (state, action) => ({
+        ...state,
+        target: action.payload,
+    }),
 });

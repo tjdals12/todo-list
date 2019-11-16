@@ -1,7 +1,7 @@
 import { ActionType } from 'typesafe-actions';
-import { getTodos, getTodo, addTodo, onChange } from './action';
+import { getTodos, getTodo, addTodo, setTarget } from './action';
 
-const actions = { getTodos, getTodo, addTodo, onChange };
+const actions = { getTodos, getTodo, addTodo, setTarget };
 export type todosActionTypes = ActionType<typeof actions>;
 
 export type Todo = {
@@ -22,4 +22,5 @@ export type TodoParameter = {
 export type todosStateTypes = {
     todos: Todo[];
     todo: Todo;
+    target: string;
 };

@@ -17,9 +17,9 @@ export const addTodo = createAsyncAction(
     'todos/ADD_TODO_REQUEST',
     'todos/ADD_TODO_SUCCESS',
     'todos/ADD_TODO_FAILURE',
-)<TodoParameter, Todo, void>();
+)<{ archive: string; param: TodoParameter }, Todo, void>();
 
-export const onChange = createAction(
-    'todos/ON_CHANGE',
-    (name: string, target?: string) => ({ name, target }),
+export const setTarget = createAction(
+    'todos/SET_TARGET',
+    (target: string) => target,
 )();

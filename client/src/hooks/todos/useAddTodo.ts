@@ -5,7 +5,8 @@ import { addTodo, TodoParameter } from 'store/modules/todos';
 export default function useAddTodo() {
     const dispatch = useDispatch();
     return useCallback(
-        (param: TodoParameter) => dispatch(addTodo.request(param)),
+        (archive, param: TodoParameter) =>
+            dispatch(addTodo.request({ archive, param })),
         [dispatch],
     );
 }

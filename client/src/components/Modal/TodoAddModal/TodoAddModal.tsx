@@ -1,4 +1,4 @@
-import React, { useReducer, ChangeEvent } from 'react';
+import React, { useReducer } from 'react';
 import classNames from 'classnames/bind';
 import {
     Modal,
@@ -13,7 +13,7 @@ import {
     Input,
 } from 'reactstrap';
 import { useModal, useModalClose } from 'hooks/modals';
-import { useAddTodo } from 'hooks/todos';
+import { useAddTodo, useTodoTarget } from 'hooks/todos';
 import { TodoParameter } from 'store/modules/todos';
 import styles from './TodoAddModal.scss';
 
@@ -39,6 +39,7 @@ export default function TodoAddModal({
     const isOpen = useModal('todoAddModal');
     const onClose = useModalClose();
     const onAddTodo = useAddTodo();
+    const target = useTodoTarget();
     const [state, dispatch] = useReducer(reducer, {
         text: '',
         tags: '',
@@ -51,7 +52,7 @@ export default function TodoAddModal({
     };
 
     const onSubmit = (): void => {
-        onAddTodo(state);
+        onAddTodo(target, state);
         onClose('todoAddModal');
     };
 
