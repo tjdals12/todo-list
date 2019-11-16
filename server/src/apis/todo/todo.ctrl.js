@@ -1,4 +1,5 @@
 import Todo from 'models/todo';
+import Archive from 'models/archive';
 import Joi from 'joi';
 
 export const getTodos = async ctx => {
@@ -24,6 +25,8 @@ export const getTodo = async ctx => {
 };
 
 export const addTodo = async ctx => {
+    const { id: archive } = ctx.params;
+
     const schema = Joi.object().keys({
         text: Joi.string().required(),
         tags: Joi.array()
@@ -43,6 +46,7 @@ export const addTodo = async ctx => {
 
     try {
         const todo = await Todo.addTodo(ctx.request.body);
+        await Archive.addTodo(archive, todo._id);
 
         ctx.body = todo;
     } catch (e) {

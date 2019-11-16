@@ -9,6 +9,7 @@ const { port: PORT } = config;
 
 describe(clc.bgGreen(clc.black('[ Todo ]')), () => {
     let server;
+    let archiveId;
     let id;
 
     before(done => {
@@ -31,11 +32,28 @@ describe(clc.bgGreen(clc.black('[ Todo ]')), () => {
             .catch(err => done(err));
     });
 
+    it('** prepare Archive', done => {
+        request(server)
+            .post('/api/archives')
+            .send({
+                title: 'Archive 추가',
+            })
+            .expect(200)
+            .end((err, ctx) => {
+                if (err) throw err;
+
+                archiveId = ctx.body._id;
+
+                expect(ctx.body.title).to.equals('Archive 추가');
+                done();
+            });
+    });
+
     it('addTodo', done => {
         request(server)
-            .post(`/api/todos`)
+            .post(`/api/todos/${archiveId}`)
             .send({
-                todo: 'Typescript로 사이드 프로젝트 해보기',
+                text: 'Typescript로 사이드 프로젝트 해보기',
                 tags: ['Typescript', '프로젝트'],
             })
             .expect(200)
@@ -43,9 +61,9 @@ describe(clc.bgGreen(clc.black('[ Todo ]')), () => {
                 if (err) throw err;
 
                 id = ctx.body._id;
-                const { todo, tags, isDone } = ctx.body;
+                const { text, tags, isDone } = ctx.body;
 
-                expect(todo).to.equals('Typescript로 사이드 프로젝트 해보기');
+                expect(text).to.equals('Typescript로 사이드 프로젝트 해보기');
                 expect(tags).have.length(2);
                 expect(isDone).to.equals(false);
                 done();
