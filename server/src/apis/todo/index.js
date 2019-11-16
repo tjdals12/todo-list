@@ -10,10 +10,10 @@ const todo = new Router();
  *  todo:
  *      type: object
  *      required:
- *          - todo
+ *          - text
  *          - tags
  *      properties:
- *          todo:
+ *          text:
  *              type: string
  *          tags:
  *              type: array
@@ -76,7 +76,7 @@ todo.get('/:id', commonCtrl.checkObjectId, todoCtrl.getTodo);
 
 /**
  * @swagger
- * /api/todos:
+ * /api/todos/{id}:
  *  post:
  *      tags:
  *          - Todos
@@ -87,6 +87,12 @@ todo.get('/:id', commonCtrl.checkObjectId, todoCtrl.getTodo);
  *      produces:
  *          - application/json
  *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: archive id
+ *            required: true
+ *            type: string
+ *            example: ''
  *          - in: body
  *            name: body
  *            description: todo parameters
@@ -94,7 +100,7 @@ todo.get('/:id', commonCtrl.checkObjectId, todoCtrl.getTodo);
  *            schema:
  *              type: object
  *              properties:
- *                  todo:
+ *                  text:
  *                      type: string
  *                      example: 'Todo-list 앱 만들기'
  *                  tags:
@@ -108,6 +114,6 @@ todo.get('/:id', commonCtrl.checkObjectId, todoCtrl.getTodo);
  *              schema:
  *                  $ref: '#/definitions/todo'
  */
-todo.post('/', todoCtrl.addTodo);
+todo.post('/:id', commonCtrl.checkObjectId, todoCtrl.addTodo);
 
 export default todo;

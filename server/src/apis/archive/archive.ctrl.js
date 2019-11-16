@@ -13,7 +13,8 @@ export const getArchives = async ctx => {
         const archives = await Archive.find()
             .sort({ 'timestamp.regDt': -1 })
             .skip((page - 1) * 10)
-            .limit(10);
+            .limit(10)
+            .populate({ path: 'todos' });
 
         ctx.body = archives;
     } catch (e) {
@@ -25,7 +26,7 @@ export const getArchive = async ctx => {
     const { id } = ctx.params;
 
     try {
-        const archive = await Archive.findById(id);
+        const archive = await Archive.findById(id).populate({ path: 'todos' });
 
         ctx.body = archive;
     } catch (e) {
