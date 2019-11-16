@@ -3,7 +3,7 @@ import { Timestamp } from 'models/common/schema';
 import DEFINE from './common';
 
 const TodoSchema = new Schema({
-    todo: String,
+    text: String,
     tags: {
         type: Array,
         default: [],
@@ -29,8 +29,8 @@ const TodoSchema = new Schema({
 TodoSchema.set('toJSON', { getters: true });
 
 TodoSchema.statics.addTodo = async function(params) {
-    const { todo, tags } = params;
-    const newTodo = new this({ todo, tags });
+    const { text, tags } = params;
+    const newTodo = new this({ text, tags });
 
     return newTodo.save();
 };

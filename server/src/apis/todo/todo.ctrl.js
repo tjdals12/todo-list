@@ -25,10 +25,12 @@ export const getTodo = async ctx => {
 
 export const addTodo = async ctx => {
     const schema = Joi.object().keys({
-        todo: Joi.string().required(),
+        text: Joi.string().required(),
         tags: Joi.array()
             .items(Joi.string())
             .required(),
+        effStaDt: Joi.string().optional(),
+        effEndDt: Joi.string().optional(),
     });
 
     const result = Joi.validate(ctx.request.body, schema);
