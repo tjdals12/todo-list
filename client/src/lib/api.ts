@@ -8,8 +8,9 @@ const api: AxiosInstance = axios.create({
 });
 
 /** Archives */
-export const getArchives = (): AxiosPromise<AxiosResponse<Archive[]>> =>
-    api.get('/archives');
+export const getArchives = (
+    page: number,
+): AxiosPromise<AxiosResponse<Archive[]>> => api.get(`/archives?page=${page}`);
 
 export const getArchive = (
     id: string,

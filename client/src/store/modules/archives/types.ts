@@ -1,5 +1,6 @@
 import { ActionType } from 'typesafe-actions';
 import { Timestamp } from 'store/modules/common/types';
+import { Todo } from 'store/modules/todos';
 import {
     getArchives,
     getArchive,
@@ -13,7 +14,7 @@ export type archivesActionTypes = ActionType<typeof actions>;
 export type Archive = {
     _id: string;
     title: string;
-    todos: Array<object>;
+    todos: Array<Todo>;
     timestamp: Timestamp;
 };
 
@@ -25,4 +26,5 @@ export type deleteResult = {
 export type archivesStateTypes = {
     archives: Archive[];
     archive: Archive;
+    lastPage: number;
 };

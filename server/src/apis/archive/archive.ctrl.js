@@ -12,9 +12,11 @@ export const getArchives = async ctx => {
     try {
         const archives = await Archive.find()
             .sort({ 'timestamp.regDt': -1 })
-            .skip((page - 1) * 10)
-            .limit(10)
+            .limit(page * 5)
             .populate({ path: 'todos' });
+        const count = await Archive.countDocuments();
+
+        ctx.set('Last-Page', Math.ceil(count / 5));
 
         ctx.body = archives;
     } catch (e) {

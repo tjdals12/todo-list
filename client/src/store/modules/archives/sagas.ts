@@ -9,11 +9,19 @@ import {
 } from './action';
 import { Archive, deleteResult } from './types';
 
-function* runRequestArchives() {
-    const { data }: AxiosResponse<Archive[]> = yield call(api.getArchives);
+function* runRequestArchives(page: number) {
+    const { data, headers }: AxiosResponse<Archive[]> = yield call(
+        api.getArchives,
+        page,
+    );
 
     if (data) {
-        yield put(getArchives.success(data));
+        yield put(
+            getArchives.success({
+                archives: data,
+                lastPage: parseInt(headers['last-page'] || 1, 10),
+            }),
+        );
     } else {
         yield put(getArchives.failure());
     }
@@ -21,8 +29,10 @@ function* runRequestArchives() {
 
 function* handleRequestArchives() {
     while (true) {
-        yield take(getArchives.request);
-        yield fork(runRequestArchives);
+        const action: ReturnType<typeof getArchives.request> = yield take(
+            getArchives.request,
+        );
+        yield fork(runRequestArchives, action.payload);
     }
 }
 
@@ -59,7 +69,7 @@ function* runCreateArchive(title: string) {
 
     if (data) {
         yield put(createArchive.success(data));
-        yield fork(runRequestArchives);
+        yield fork(runRequestArchives, 1);
     } else {
         yield put(createArchive.failure());
     }
@@ -82,7 +92,7 @@ function* runDeleteArchive(id: string) {
 
     if (data) {
         yield put(deleteArchive.success(data));
-        yield fork(runRequestArchives);
+        yield fork(runRequestArchives, 1);
     } else {
         yield put(deleteArchive.failure());
     }

@@ -11,10 +11,12 @@ const TodoSchema = new Schema({
     effStaDt: {
         type: Date,
         default: DEFINE.dateNow,
+        get: DEFINE.dateConverter,
     },
     effEndDt: {
         type: Date,
         default: DEFINE.dateNow,
+        get: DEFINE.dateConverter,
     },
     isDone: {
         type: Boolean,

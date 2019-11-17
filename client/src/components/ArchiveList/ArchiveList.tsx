@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import Archive from 'components/Archive';
 import { useArchives } from 'hooks/archives';
+import { Button } from 'reactstrap';
+import { MdChevronRight } from 'react-icons/md';
 import styles from './ArchiveList.scss';
 
 const cx = classNames.bind(styles);
@@ -13,10 +15,16 @@ type ArchiveListProps = {
 export default function ArchiveList({
     className,
 }: ArchiveListProps): React.ReactElement {
-    const { archives, getArchives } = useArchives();
+    const [page, setPage] = useState(1);
+    const { archives, lastPage, getArchives } = useArchives();
+
+    const onRequestArchives = (page: number): void => {
+        getArchives(page + 1);
+        setPage(page + 1);
+    };
 
     useEffect(() => {
-        getArchives();
+        getArchives(1);
     }, [getArchives]);
 
     return (
@@ -24,6 +32,14 @@ export default function ArchiveList({
             {archives.map(archive => (
                 <Archive key={archive._id} archive={archive} />
             ))}
+
+            <Button
+                color={page === lastPage ? 'secondary' : 'primary'}
+                disabled={page === lastPage}
+                onClick={(): void => onRequestArchives(page)}
+            >
+                <MdChevronRight size={30} />
+            </Button>
         </div>
     );
 }

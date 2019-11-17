@@ -5,7 +5,7 @@ export const getArchives = createAsyncAction(
     'archives/GET_ARCHIVES_REQUEST',
     'archives/GET_ARCHIVES_SUCCESS',
     'archives/GET_ARCHIVES_FAULURE',
-)<void, Archive[], void>();
+)<number, { archives: Archive[]; lastPage: number }, void>();
 
 export const getArchive = createAsyncAction(
     'archives/GET_ARCHIVE_REQUEST',

@@ -1,6 +1,7 @@
 import { take, call, put, fork } from 'redux-saga/effects';
 import * as api from 'lib/api';
 import { AxiosResponse } from 'axios';
+import { getArchives } from 'store/modules/archives';
 import { getTodos, getTodo, addTodo } from './action';
 import { Todo, TodoParameter } from './types';
 
@@ -50,7 +51,7 @@ function* runAddTodo(archive: string, param: TodoParameter) {
 
     if (data) {
         yield put(addTodo.success(data));
-        yield fork(runRequestTodos);
+        yield put(getArchives.request(1));
     } else {
         yield put(addTodo.failure());
     }
