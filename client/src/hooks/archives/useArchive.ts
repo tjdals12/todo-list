@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { getArchive } from 'store/modules/archives';
 
-export default function useArchive(id: string) {
+export default function useArchive() {
     const archive = useSelector((state: RootState) => state.archives.archive);
     const dispatch = useDispatch();
 
     return {
         archive,
-        getArchive: useCallback(() => dispatch(getArchive.request(id)), [
-            dispatch,
-            id,
-        ]),
+        getArchive: useCallback(
+            (id: string) => dispatch(getArchive.request(id)),
+            [dispatch],
+        ),
     };
 }

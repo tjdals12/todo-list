@@ -3,6 +3,8 @@ import { Card, CardSubtitle, CardText, Badge, Button } from 'reactstrap';
 import { FaHeart, FaStar, FaTrash } from 'react-icons/fa';
 import classNames from 'classnames/bind';
 import { ButtonWrapper } from 'components/common';
+import { useModalOpen } from 'hooks/modals';
+import { useSetTarget } from 'hooks/archives';
 import styles from './TodoItem.scss';
 
 const cx = classNames.bind(styles);
@@ -16,14 +18,19 @@ type Todo = {
 };
 
 type TodoItemProps = {
+    archive: string;
     todo: Todo;
     className?: string;
 };
 
 export default function TodoItem({
+    archive,
     todo,
     className,
 }: TodoItemProps): React.ReactElement {
+    const onOpen = useModalOpen();
+    const onSetTarget = useSetTarget();
+
     return (
         <Card
             className={cx(
@@ -53,7 +60,16 @@ export default function TodoItem({
                 className="position-absolute"
                 style={{ top: '10px', right: '10px' }}
             >
-                <Button size="sm" outline className="border-0 rounded-circle">
+                <Button
+                    size="sm"
+                    outline
+                    className="border-0 rounded-circle"
+                    onClick={() => {
+                        onOpen('todoDeleteModal');
+                        onSetTarget({ name: 'archiveId', value: archive });
+                        onSetTarget({ name: 'todoId', value: todo._id });
+                    }}
+                >
                     <FaTrash />
                 </Button>
             </ButtonWrapper>

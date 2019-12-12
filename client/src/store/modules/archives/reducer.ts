@@ -15,6 +15,8 @@ const initialState: archivesStateTypes = {
             updDt: '',
         },
     },
+    archiveId: '',
+    todoId: '',
     lastPage: 1,
 };
 
@@ -29,24 +31,42 @@ export default createReducer<archivesStateTypes, archivesActionTypes>(
                 draft.lastPage = action.payload.lastPage;
             });
         },
-        'archives/GET_ARCHIVES_FAULURE': state => state,
+        'archives/GET_ARCHIVES_FAILURE': state => state,
 
         /** GET ONE */
         'archives/GET_ARCHIVE_SUCCESS': (state, action) => ({
             ...state,
             archive: action.payload,
         }),
-        'archives/GET_ARCHIVE_FAULURE': state => state,
+        'archives/GET_ARCHIVE_FAILURE': state => state,
 
         /** CREATE */
         'archives/CREATE_ACHIVE_SUCCESS': (state, action) => ({
             ...state,
             archive: action.payload,
         }),
-        'archives/CREATE_ACHIVE_FAULURE': state => state,
+        'archives/CREATE_ACHIVE_FAILURE': state => state,
+
+        /** EDIT */
+        'archives/EDIT_ACHIVE_SUCCESS': (state, action) => ({
+            ...state,
+            archive: action.payload,
+        }),
+        'archives/EDIT_ACHIVE_FAILURE': state => state,
 
         /** DELETE */
         'archives/DELETE_ACHIVE_SUCCESS': state => state,
-        'archives/DELETE_ACHIVE_FAULURE': state => state,
+        'archives/DELETE_ACHIVE_FAILURE': state => state,
+
+        /** DELETE TODO */
+        'archives/DELETE_TODO_SUCCESS': (state, action) => ({
+            ...state,
+            archive: action.payload,
+        }),
+        'archives/DELETE_TODO_FAILURE': state => state,
+        'archives/SET_TARGET': (state, action) => ({
+            ...state,
+            [action.payload.name]: action.payload.value,
+        }),
     },
 );

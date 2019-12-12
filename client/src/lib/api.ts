@@ -20,9 +20,21 @@ export const createArchive = (
     title: string,
 ): AxiosPromise<AxiosResponse<Archive>> => api.post('/archives', { title });
 
+export const editArchive = (
+    archiveId: string,
+    title: string,
+): AxiosPromise<AxiosResponse<Archive>> =>
+    api.patch(`/archives/${archiveId}/edit`, { title });
+
 export const deleteArchive = (
     id: string,
 ): AxiosPromise<AxiosResponse<deleteResult>> => api.delete(`/archives/${id}`);
+
+export const deleteTodo = (
+    archiveId: string,
+    todoId: string,
+): AxiosPromise<AxiosResponse<Archive>> =>
+    api.patch(`/archives/${archiveId}/delete-todo`, { todoId });
 
 /** Todos */
 export const getTodos = (): AxiosPromise<AxiosResponse<Todo[]>> =>

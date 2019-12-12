@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { Timestamp } from 'models/common/schema';
+import Todo from './todo';
 
 const ArchiveSchema = new Schema({
     title: String,
@@ -36,6 +37,22 @@ ArchiveSchema.statics.addTodo = function(archive, todo) {
             new: true,
         },
     );
+};
+
+ArchiveSchema.statics.deleteTodo = async function(archive, todo) {
+    await Todo.deleteOne({ _id: todo });
+
+    return this.findByIdAndUpdate(
+        archive,
+        {
+            $pull: {
+                todos: todo,
+            },
+        },
+        {
+            new: true,
+        },
+    ).populate({ path: 'todos' });
 };
 
 export default model('Archive', ArchiveSchema);

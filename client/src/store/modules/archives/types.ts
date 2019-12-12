@@ -5,10 +5,21 @@ import {
     getArchives,
     getArchive,
     createArchive,
+    editArchive,
     deleteArchive,
+    deleteTodo,
+    setTarget,
 } from './action';
 
-const actions = { getArchives, getArchive, createArchive, deleteArchive };
+const actions = {
+    getArchives,
+    getArchive,
+    createArchive,
+    editArchive,
+    deleteArchive,
+    deleteTodo,
+    setTarget,
+};
 export type archivesActionTypes = ActionType<typeof actions>;
 
 export type Archive = {
@@ -26,5 +37,7 @@ export type deleteResult = {
 export type archivesStateTypes = {
     archives: Archive[];
     archive: Archive;
+    archiveId: string;
+    todoId: string;
     lastPage: number;
 };

@@ -99,6 +99,39 @@ archive.post('/', archiveCtrl.createArchive);
 
 /**
  * @swagger
+ * /api/archives/{id}/edit:
+ *  patch:
+ *      tags:
+ *          - Archives
+ *      summary: Archive 수정
+ *      description: Archive 수정
+ *      produces:
+ *          - application/json
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: archive id
+ *            type: string
+ *            example: ''
+ *          - in: body
+ *            name: body
+ *            description: edit parameters
+ *            schema:
+ *              type: object
+ *              properties:
+ *                  title:
+ *                      type: string
+ *                      example: ''
+ *      responses:
+ *          200:
+ *              description: Succesful operation
+ *              schema:
+ *                  $ref: '#/definitions/archive'
+ */
+archive.patch('/:id/edit', commonCtrl.checkObjectId, archiveCtrl.editArchive);
+
+/**
+ * @swagger
  * /api/archives/{id}:
  *  delete:
  *      tags:
@@ -119,5 +152,46 @@ archive.post('/', archiveCtrl.createArchive);
  *              description: Successful operation
  */
 archive.delete('/:id', commonCtrl.checkObjectId, archiveCtrl.deleteArchive);
+
+/**
+ * @swagger
+ * /api/archives/{id}/delete-todo:
+ *  patch:
+ *      tags:
+ *          - Archives
+ *      summary: Archive에서 Todo 삭제
+ *      description: Archive에서 Todo 삭제
+ *      consumes:
+ *          - application/json
+ *      produces:
+ *          - application/json
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: archive id
+ *            required: true
+ *            type: string
+ *            example: ''
+ *          - in: body
+ *            name: body
+ *            description: todo delete parameters
+ *            required: true
+ *            schema:
+ *              type: object
+ *              properties:
+ *                  todoId:
+ *                      type: string
+ *                      example: ''
+ *      responses:
+ *          200:
+ *              description: Successful operation
+ *              schema:
+ *                  $ref: '#/definitions/archive'
+ */
+archive.patch(
+    '/:id/delete-todo',
+    commonCtrl.checkObjectId,
+    archiveCtrl.deleteTodo,
+);
 
 export default archive;

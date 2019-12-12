@@ -58,6 +58,43 @@ export const createArchive = async ctx => {
     }
 };
 
+export const editArchive = async ctx => {
+    const { id } = ctx.params;
+    const { title } = ctx.request.body;
+
+    const schema = Joi.object().keys({
+        title: Joi.string().required(),
+    });
+
+    const result = Joi.validate(ctx.request.body, schema);
+
+    if (result.error) {
+        ctx.status = 400;
+        ctx.body = result.error;
+        return;
+    }
+
+    try {
+        const archive = await Archive.findOneAndUpdate(
+            {
+                _id: id,
+            },
+            {
+                $set: {
+                    title,
+                },
+            },
+            {
+                new: true,
+            },
+        );
+
+        ctx.body = archive;
+    } catch (e) {
+        ctx.status = 500;
+    }
+};
+
 export const deleteArchive = async ctx => {
     const { id } = ctx.params;
 
@@ -65,6 +102,19 @@ export const deleteArchive = async ctx => {
         const result = await Archive.deleteOne({ _id: id });
 
         ctx.body = result;
+    } catch (e) {
+        ctx.status = 500;
+    }
+};
+
+export const deleteTodo = async ctx => {
+    const { id: archiveId } = ctx.params;
+    const { todoId } = ctx.request.body;
+
+    try {
+        const archive = await Archive.deleteTodo(archiveId, todoId);
+
+        ctx.body = archive;
     } catch (e) {
         ctx.status = 500;
     }

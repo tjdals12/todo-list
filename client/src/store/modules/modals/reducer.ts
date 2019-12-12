@@ -4,7 +4,9 @@ import { OPEN, CLOSE } from './action';
 
 const initialState: modalsStateType = {
     todoAddModal: false,
+    todoDeleteModal: false,
     archiveCreateModal: false,
+    archiveEditModal: false,
 };
 
 export default createReducer<modalsStateType, modalsActionTypes>(initialState, {

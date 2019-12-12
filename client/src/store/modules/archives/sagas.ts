@@ -5,7 +5,9 @@ import {
     getArchives,
     getArchive,
     createArchive,
+    editArchive,
     deleteArchive,
+    deleteTodo,
 } from './action';
 import { Archive, deleteResult } from './types';
 
@@ -84,6 +86,30 @@ function* handleCreateArchive() {
     }
 }
 
+function* runEditArchive(payload: { archiveId: string; title: string }) {
+    const { data }: AxiosResponse<Archive> = yield call(
+        api.editArchive,
+        payload.archiveId,
+        payload.title,
+    );
+
+    if (data) {
+        yield put(editArchive.success(data));
+        yield fork(runRequestArchives, 1);
+    } else {
+        yield put(editArchive.failure());
+    }
+}
+
+function* handleEditArchive() {
+    while (true) {
+        const action: ReturnType<typeof editArchive.request> = yield take(
+            editArchive.request,
+        );
+        yield fork(runEditArchive, action.payload);
+    }
+}
+
 function* runDeleteArchive(id: string) {
     const { data }: AxiosResponse<deleteResult> = yield call(
         api.deleteArchive,
@@ -107,9 +133,35 @@ function* handleDeleteArchive() {
     }
 }
 
+function* runDeleteTodo(payload: { archiveId: string; todoId: string }) {
+    const { data }: AxiosResponse<Archive> = yield call(
+        api.deleteTodo,
+        payload.archiveId,
+        payload.todoId,
+    );
+
+    if (data) {
+        yield put(deleteTodo.success(data));
+        yield fork(runRequestArchives, 1);
+    } else {
+        yield put(deleteTodo.failure());
+    }
+}
+
+function* handleDeleteTodo() {
+    while (true) {
+        const action: ReturnType<typeof deleteTodo.request> = yield take(
+            deleteTodo.request,
+        );
+        yield fork(runDeleteTodo, action.payload);
+    }
+}
+
 export default function* archivesSaga() {
     yield fork(handleRequestArchives);
     yield fork(handleRequestArchive);
     yield fork(handleCreateArchive);
+    yield fork(handleEditArchive);
     yield fork(handleDeleteArchive);
+    yield fork(handleDeleteTodo);
 }

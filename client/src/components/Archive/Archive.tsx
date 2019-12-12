@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
-import { Card, CardHeader, CardBody, CardFooter, Button } from 'reactstrap';
-import { FaPlus, FaEllipsisH } from 'react-icons/fa';
+import {
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    Button,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+} from 'reactstrap';
+import { FaPlus, FaEllipsisH, FaCaretRight } from 'react-icons/fa';
 import TodoItem from 'components/TodoItem';
 import { Archive as ArchiveType } from 'store/modules/archives';
 import { useModalOpen } from 'hooks/modals';
 import { useTododActions } from 'hooks/todos';
+import { useArchive, useDeleteArchive } from 'hooks/archives';
 import styles from './Archive.scss';
 
 const cx = classNames.bind(styles);
@@ -19,8 +30,12 @@ export default function Archive({
     archive,
     className,
 }: ArchiveProps): React.ReactElement {
+    const [openMenu, setOpenMenu] = useState(false);
+
     const onOpen = useModalOpen();
     const { onTarget } = useTododActions();
+    const { getArchive } = useArchive();
+    const onDeleteArchive = useDeleteArchive(archive._id);
 
     return (
         <Card className={cx(className, 'archive mr-4')}>
@@ -41,14 +56,38 @@ export default function Archive({
                     >
                         <FaPlus size={15} />
                     </Button>
-                    <Button color="secondary" className="text-white">
-                        <FaEllipsisH size={15} />
-                    </Button>
+
+                    <Dropdown
+                        isOpen={openMenu}
+                        toggle={() => setOpenMenu(!openMenu)}
+                        className="d-inline-block"
+                    >
+                        <DropdownToggle>
+                            <FaEllipsisH size={15} />
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem
+                                onClick={() => {
+                                    getArchive(archive._id);
+                                    onOpen('archiveEditModal');
+                                }}
+                            >
+                                <FaCaretRight className="pb-1" /> 수정
+                            </DropdownItem>
+                            <DropdownItem onClick={() => onDeleteArchive()}>
+                                <FaCaretRight className="pb-1" /> 삭제
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </div>
             </CardHeader>
             <CardBody className={cx('archive__body', 'bg-light m-0')} tag="ul">
                 {archive.todos.map(todo => (
-                    <TodoItem key={todo._id} todo={todo} />
+                    <TodoItem
+                        key={todo._id}
+                        archive={archive._id}
+                        todo={todo}
+                    />
                 ))}
             </CardBody>
             <CardFooter className="text-right">
